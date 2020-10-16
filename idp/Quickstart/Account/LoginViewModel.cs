@@ -10,7 +10,6 @@ namespace IdentityServerHost.Quickstart.UI
 {
     public class LoginViewModel : LoginInputModel
     {
-        public bool AllowRememberLogin { get; set; } = true;
         public bool EnableLocalLogin { get; set; } = true;
 
         public IEnumerable<ExternalProvider> ExternalProviders { get; set; } = Enumerable.Empty<ExternalProvider>();
@@ -18,5 +17,7 @@ namespace IdentityServerHost.Quickstart.UI
 
         public bool IsExternalLoginOnly => EnableLocalLogin == false && ExternalProviders?.Count() == 1;
         public string ExternalLoginScheme => IsExternalLoginOnly ? ExternalProviders?.SingleOrDefault()?.AuthenticationScheme : null;
+        
+        public string SamlRequest { get; set; }
     }
 }

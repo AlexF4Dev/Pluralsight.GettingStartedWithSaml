@@ -1,8 +1,20 @@
-﻿@{
+﻿@model sp.Controllers.ViewModel
+@using Microsoft.AspNetCore.Authentication
+@{
     ViewData["Title"] = "Home Page";
+    var user = await Context.AuthenticateAsync();
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Service Provider</h1>
+
+    @if (user.Succeeded)
+    {
+        <pre><code>@Model.SamlMessage</code></pre>
+    }
+    else
+    {
+        <a class="btn btn-primary" asp-action="Login">Login</a>
+    }
+    
 </div>
