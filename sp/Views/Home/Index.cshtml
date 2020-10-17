@@ -1,5 +1,6 @@
 ﻿@model sp.Controllers.ViewModel
 @using Microsoft.AspNetCore.Authentication
+@using System.Security.Claims
 @{
     ViewData["Title"] = "Home Page";
     var user = await Context.AuthenticateAsync();
@@ -7,14 +8,16 @@
 
 <div class="text-center">
     <h1 class="display-4">Service Provider</h1>
-
-    @if (user.Succeeded)
-    {
-        <pre><code>@Model.SamlMessage</code></pre>
-    }
-    else
-    {
-        <a class="btn btn-primary" asp-action="Login">Login</a>
-    }
-    
 </div>
+
+@if (user.Succeeded)
+{
+    <h2 class="text-center">Hello, @user.Principal.FindFirstValue(ClaimTypes.Name)</h2>
+    <pre><code class="language-xml">@Model.SamlMessage</code></pre>
+}
+else
+{
+    <div class="text-center">
+        <a class="btn btn-primary" asp-action="Login">Login</a>
+    </div>
+}

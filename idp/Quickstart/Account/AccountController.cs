@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using Common;
 using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Events;
@@ -29,6 +30,7 @@ namespace IdentityServerHost.Quickstart.UI
     {
         private readonly TestUserStore users;
         private readonly ISamlInteractionService samlInteractionService;
+        private readonly ISamlMessageParser samlMessageParser;
         private readonly IIdentityServerInteractionService interaction;
         private readonly IClientStore clientStore;
         private readonly IAuthenticationSchemeProvider schemeProvider;
@@ -36,6 +38,7 @@ namespace IdentityServerHost.Quickstart.UI
 
         public AccountController(
             ISamlInteractionService samlInteractionService,
+            ISamlMessageParser samlMessageParser,
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
@@ -43,6 +46,7 @@ namespace IdentityServerHost.Quickstart.UI
             TestUserStore users = null)
         {
             this.samlInteractionService = samlInteractionService ?? throw new ArgumentNullException(nameof(samlInteractionService));
+            this.samlMessageParser = samlMessageParser ?? throw new ArgumentNullException(nameof(samlMessageParser));
             this.interaction = interaction;
             this.clientStore = clientStore;
             this.schemeProvider = schemeProvider;
@@ -60,7 +64,7 @@ namespace IdentityServerHost.Quickstart.UI
             var requestId = returnUrl.Split("requestId=")[1];
             var samlContext = await samlInteractionService.GetRequestContext(requestId);
             var request = samlContext.Raw[SamlConstants.Parameters.SamlRequest];
-            vm.SamlRequest = await ParseSamlMessage(request);
+            vm.SamlRequest = await samlMessageParser.ParseSamlMessage(request);
             
             return View(vm);
         }
@@ -270,75 +274,6 @@ namespace IdentityServerHost.Quickstart.UI
             }
 
             return vm;
-        }
-
-        private async Task<string> ParseSamlMessage(string message)
-        {
-            if (string.IsNullOrWhiteSpace(message)) return null;
-            
-            string formattedMessage;
-            formattedMessage = message.TrimStart('=', '?').TrimEnd('&');
-
-            // handle plain XML
-            if (formattedMessage.StartsWith('<') && formattedMessage.EndsWith('>')) return FormatXml(formattedMessage);
-
-            // URL decode
-            formattedMessage = UrlDecode(formattedMessage);
-            
-            // deflate or base64 decoe
-            formattedMessage = await DecodeAndDecompress(formattedMessage);
-
-            // format
-            formattedMessage = FormatXml(formattedMessage);
-
-            return formattedMessage;
-        }
-        
-        private string UrlDecode(string message)
-        {
-            if (message.Contains("%"))
-                return WebUtility.UrlDecode(message);
-
-            return message;
-        }
-        
-        private async Task<string> DecodeAndDecompress(string message)
-        {
-            try
-            {
-                using (var outputStream = new MemoryStream())
-                using (var compressedStream = new MemoryStream(Convert.FromBase64String(message)))
-                using (var deflateStream = new DeflateStream(compressedStream, CompressionMode.Decompress))
-                {
-                    await deflateStream.CopyToAsync(outputStream);
-                    var array = outputStream.ToArray();
-                    return Encoding.UTF8.GetString(array);
-                }
-            }
-            catch
-            {
-                return Encoding.UTF8.GetString(Convert.FromBase64String(message));
-            }
-        }
-
-        private string FormatXml(string message)
-        {
-            var stringBuilder = new StringBuilder();
-            var element = XElement.Parse(message);
-
-            var settings = new XmlWriterSettings
-            {
-                OmitXmlDeclaration = true,
-                Indent = true,
-                NewLineOnAttributes = true
-            };
-
-            using (var xmlWriter = XmlWriter.Create(stringBuilder, settings))
-            {
-                element.Save(xmlWriter);
-            }
-
-            return stringBuilder.ToString();
         }
     }
 }
