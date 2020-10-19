@@ -18,6 +18,7 @@ namespace idp
                 {
                     ClientId = "https://localhost:5001",
                     AllowedScopes = {"openid", "profile"},
+                    RequireConsent = false,
                     ProtocolType = IdentityServerConstants.ProtocolTypes.Saml2p
                 }
             };

@@ -22,12 +22,14 @@ namespace sp
                 .AddCookie("cookie")
                 .AddSaml2p("saml", options =>
                 {
+                    // Describe ourselves (the SP)
                     options.ServiceProviderOptions = new SpOptions
                     {
                         EntityId = "https://localhost:5001",
                         SignAuthenticationRequests = false,
                     };
 
+                    // The IdP we want users to authenticate against
                     options.IdentityProviderOptions = new IdpOptions
                     {
                         EntityId = "https://localhost:5000",
@@ -35,7 +37,9 @@ namespace sp
                         SingleSignOnEndpoint = new SamlEndpoint("https://localhost:5000/saml/sso", SamlBindingTypes.HttpRedirect)
                     };
 
+                    // our ACS URL
                     options.CallbackPath = "/saml/acs";
+                    
                     options.Licensee = DemoLicense.Licensee;
                     options.LicenseKey = DemoLicense.LicenseKey;
                 });
