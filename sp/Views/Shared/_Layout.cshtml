@@ -92,7 +92,7 @@
                 </nav>
             </div>
 
-            <div class="col-md-2 tw-flex tw-flex-wrap tw-justify-center tw-mt-6">
+            <div class="col-md-2 tw-flex tw-flex-wrap tw-justify-center tw-mt-6 tw-text-2xl">
                 @if (user.Succeeded)
                 {
                     <div class="text-center">
@@ -102,7 +102,9 @@
                         </a>
                     </div>
                     <div>
-                        <a class="tw-text-white hover:tw-text-gray-500 tw-italic">Show me my assertion..</a>
+                        <a class="tw-text-white hover:tw-text-gray-500 tw-text-xl" role="button" data-toggle="collapse" href="#saml" aria-expanded="false" aria-controls="saml">
+                            Debug SAML 🤫
+                        </a>
                     </div>
                 }
                 else
@@ -117,6 +119,10 @@
             </div>
         </div>
     </header>
+    
+    <div class="collapse tw-px-4 tw-pb-2" id="saml">
+        <pre><code class="language-xml">@Model.SamlMessage</code></pre>
+    </div>
 
     @RenderBody()
 
