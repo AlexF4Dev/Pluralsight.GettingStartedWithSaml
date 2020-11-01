@@ -1,6 +1,9 @@
-﻿@model sp.Controllers.ViewModel
+﻿@using Microsoft.AspNetCore.Authentication
+@using System.Security.Claims
+@model sp.Controllers.ViewModel
 @{
     ViewData["Title"] = "Home Page";
+    var user = await Context.AuthenticateAsync();
 }
 
 <section class="banner">
@@ -25,6 +28,16 @@
         </div>
     </div>
 </section>
+
+    
+@if (user.Succeeded)
+{
+    <div class="tw-w-full tw-bg-teal-500 tw-text-white tw-py-4 tw-text-center tw-text-3xl">
+        Hello, @user.Principal.FindFirstValue(ClaimTypes.Name).
+        We have some offers just for you!
+    </div>
+}
+
 <section class="sec_include">
     <div class="container">
         <div class="row">

@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Rsk.Saml" Version="3.1.1" />
+    <PackageReference Include="Rsk.Saml" Version="3.1.2" />
     
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.9" />
   </ItemGroup>
 
   <ItemGroup>
