@@ -20,6 +20,13 @@ namespace idp
                     AllowedScopes = {"openid", "profile"},
                     RequireConsent = false,
                     ProtocolType = IdentityServerConstants.ProtocolTypes.Saml2p
+                },
+                new Client
+                {
+                    ClientId = "https://localhost:5002",
+                    AllowedScopes = {"openid", "profile"},
+                    RequireConsent = false,
+                    ProtocolType = IdentityServerConstants.ProtocolTypes.Saml2p
                 }
             };
 
@@ -32,6 +39,14 @@ namespace idp
                     AssertionConsumerServices = new List<Service>
                     {
                         new Service(SamlConstants.BindingTypes.HttpPost, "https://localhost:5001/saml/acs")
+                    }
+                },
+                new ServiceProvider
+                {
+                    EntityId = "https://localhost:5002",
+                    AssertionConsumerServices = new List<Service>
+                    {
+                        new Service(SamlConstants.BindingTypes.HttpPost, "https://localhost:5002/saml/acs")
                     }
                 }
             };

@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@{
+    var user = await Context.AuthenticateAsync();
+    var count = user.Succeeded ? 1 : 0;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - SP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1><img src="img/globoticket-horizontal-white.svg"></h1>
+        <div class="header-cart">
+            <img src="img/cart.svg" />
+            <p><span>@count</span> tickets</p>
+        </div>
+    </header>
+    
+    @RenderBody()
+    
+</div>
+</body>
+</html>
