@@ -29,7 +29,7 @@ namespace sp
                         SignAuthenticationRequests = false,
                     };
 
-                    // The IdP we want users to authenticate against
+                    // The IdP we want users to authenticate against - Local
                     options.IdentityProviderOptions = new IdpOptions
                     {
                         EntityId = "https://localhost:5000",
@@ -37,16 +37,25 @@ namespace sp
                         SingleSignOnEndpoint = new SamlEndpoint("https://localhost:5000/saml/sso", SamlBindingTypes.HttpRedirect)
                     };
 
+                    // The IdP we want users to authenticate against - Okta
+                    /*options.IdentityProviderOptions = new IdpOptions
+                    {
+                        EntityId = "",
+                        SigningCertificates = {new X509Certificate2("TODO", "", X509KeyStorageFlags.EphemeralKeySet)},
+                        SingleSignOnEndpoint = new SamlEndpoint("", SamlBindingTypes.HttpRedirect)
+                    };*/
+
                     // our ACS URL
                     options.CallbackPath = "/saml/acs";
-                    
+
                     options.Licensee = DemoLicense.Licensee;
                     options.LicenseKey = DemoLicense.LicenseKey;
+
+                    options.TimeComparisonTolerance = 300;
                 });
 
+            // in memory store for remembering SAML messages - for demos only
             services.AddScoped<ISamlMessageParser, SamlMessageParser>();
-            
-            // in memory store for remembering SAML messages
             services.AddSingleton<SamlMessageStore>();
         }
 
