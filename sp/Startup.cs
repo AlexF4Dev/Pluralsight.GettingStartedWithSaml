@@ -41,7 +41,7 @@ namespace sp
                     /*options.IdentityProviderOptions = new IdpOptions
                     {
                         EntityId = "",
-                        SigningCertificates = {new X509Certificate2("TODO", "", X509KeyStorageFlags.EphemeralKeySet)},
+                        SigningCertificates = {new X509Certificate2(System.Convert.FromBase64String(""), "", X509KeyStorageFlags.EphemeralKeySet)},
                         SingleSignOnEndpoint = new SamlEndpoint("", SamlBindingTypes.HttpRedirect)
                     };*/
 
