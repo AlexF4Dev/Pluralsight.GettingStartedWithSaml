@@ -1,21 +1,37 @@
-@using System.Diagnostics
-
-@{
-    var version = FileVersionInfo.GetVersionInfo(typeof(IdentityServer4.Hosting.IdentityServerMiddleware).Assembly.Location).ProductVersion.Split('+').First();
-}
-
 <div class="welcome-page">
     <h1>
-        <img src="~/icon.jpg">
-        Welcome to IdentityServer4
-        <small class="text-muted">(version @version)</small>
+        <img src="~/icon.png" height="50" width="50">
+        Welcome to Globomatics
     </h1>
 
     <ul>
         <li>
-            IdentityServer publishes a
-            <a href="~/.well-known/openid-configuration">discovery document</a>
-            where you can find metadata and links to all the endpoints, key material, etc.
+            Globomatics publishes a
+            <a href="~/saml/metadata">SAML metadata document</a>
+            where you can find metadata and links to fall the endpoints, key material, etc.
         </li>
     </ul>
 </div>
+
+@*<div class="welcome-page">
+    <h1>
+        <img src="~/icon.png" height="50" width="50">
+        Welcome to Globomatics
+    </h1>
+
+    <ul>
+        <li>
+            Hi Scott! What application would you like to use today?
+        </li>
+    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-6"><img class="img-fluid border rounded" src="/img/globomantics.jpg" /></div>
+            <div class="col-6"><img class="img-fluid border rounded" src="/img/globotickets.jpg" /></div>
+        </div>
+        <div class="row">
+            <div class="col-6"><span class="h3">Globomantics</span> <a href="\">login</a></div>
+            <div class="col-6"><span class="h3">Globotickets</span> <a href="\">login</a></div>
+        </div>
+    </div>
+</div>*@
