@@ -1,6 +1,9 @@
-﻿@model sp_sso.Controllers.ViewModel
+﻿@using Microsoft.AspNetCore.Authentication
+@using System.Security.Claims
+@model sp_sso.Controllers.ViewModel
 @{
     ViewData["Title"] = "Details";
+    var user = await Context.AuthenticateAsync();
 }
 
 <section class="section-details">
@@ -21,6 +24,12 @@
 </section>
 <section class="section-details divider">
 </section>
+@if (user.Succeeded)
+{
+    <div class="alert alert-info mt-2 mb-0">
+        <strong>Added to @user.Principal.FindFirstValue(ClaimTypes.GivenName)'s cart!</strong>
+    </div>
+}
 <section class="section-details">
     <div class="details-left">
     </div>
