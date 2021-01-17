@@ -3,6 +3,6 @@ namespace Common
     public static class DemoLicense
     {
         public const string Licensee = "DEMO";
-        public const string LicenseKey = "eyJTb2xkRm9yIjowLjAsIktleVByZXNldCI6NiwiU2F2ZUtleSI6ZmFsc2UsIkxlZ2FjeUtleSI6ZmFsc2UsIlJlbmV3YWxTZW50VGltZSI6IjAwMDEtMDEtMDFUMDA6MDA6MDAiLCJhdXRoIjoiREVNTyIsImV4cCI6IjIwMjEtMDItMTVUMDA6MDA6MDMuNjI2MTU3MiswMDowMCIsImlhdCI6IjIwMjEtMDEtMTZUMDA6MDA6MDMiLCJvcmciOiJERU1PIiwiYXVkIjoyfQ==.eXRrCISnGgXnO9eCKLyDS8p5tG5E+AxTpWiSceqRyfHcbg3Qr+SRESEDXQUCMh5T287EdNvm/zzbtGfUQBjlgrOvaj17PlZIziSs+XtaTJeyivQJ88oU7Xk9cZrto2EeXF+UyQGfYmBVmjZA1VdApxBsDVUMRsvz5OGFF04+akp1OFLdofoCG6Cptk11smqKJpUL6s2eoM3UEIVrU4mNXjxBrIpZQRbV1tn5Wv1UnAgkOqIWQjBtYhz3z6nlQ2H/ITvyHqE+4psALhx3eP5UmoAdov/9vrzoHaO59quVt3+ZQi2GwF6HD7m/DRXRPC42Y9uFwkM5P2I5442a40rir2xTPTtU5MmAiCx0UZjdpdoD1odCkgQDlS3QYkFuGO75Ye9C8uv+AxwYCa4dV+pUvdShWHU5V5VQal4fyk/fhEKgOsETa3DFvbj4uQKO8GwOZo82ZMRBJhRqJ9rPEUquGh77K+NvDtO9mg95ckFr3QTRHTmXqGizC2Vp9cFkiDIK7T1HNozwb+EFxsP2Zm6glLXQlo0WQyoU0kREfglaQm3ckax5lKlYb1R7exe2npkUwGZ4aMbJpa4ZKkaDiCba0NZtgH02/yFKVWLyVtHP2b1SYuMGbma9tBo9A9EUHFPFmhiKxuoW+0zCGcfSRspKs722gPK/S+TRQJs8vw3uZYQ="; // Expires 15 February 2021
+        public const string LicenseKey = "";
     }
 }
