@@ -1,6 +1,6 @@
 # Getting Started with SAML 2.0
 
-This repo contains the websites used for the two demos in my Pluralsight course "Getting Started with SAML 2.0".
+This repo contains the websites used for the two demos in my Pluralsight course "[Getting Started with SAML 2.0](https://www.scottbrady91.com/SAML/New-Pluralsight-Course-Getting-Started-with-SAML-20)".
 
 It contains:
 
